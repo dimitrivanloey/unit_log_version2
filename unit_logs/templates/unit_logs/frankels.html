@@ -1,0 +1,82 @@
+{% extends "unit_logs/base.html" %}
+
+{% block content %} 
+
+<style>
+    .units{
+        display: flex;
+        flex-flow: row;
+        justify-content: space-around;
+
+    }
+</style>
+
+
+    
+<div class="pb-2 mb-2 border-bottom">
+   
+    <a class="btn btn-primary" href="{% url 'unit_logs:new_frankel' %}" role="button">Add a new Frankel</a>
+</div>
+
+<div class="units">
+
+<div>
+    <p>Sticks:</p>
+<ul>
+    {% for frankel in frankels %}
+        {% if frankel.status == 'STICK' %}
+            <a href="{% url 'unit_logs:frankel' frankel.id %}">
+            <li>{{ frankel.date_added|date:'M d' }} - {{ frankel }}</li>
+            </a>
+        {% endif %}
+    {% endfor %}
+</ul>
+</div>
+
+
+<div>
+    <p>Not on map:</p>
+<ul>
+{% for frankel in frankels %}
+    {% if frankel.status == 'MISSING' %}
+    <a href="{% url 'unit_logs:frankel' frankel.id %}">
+    <li>{{ frankel.date_added|date:'M d' }} - {{ frankel }}</li>
+    </a>
+    {% endif %}
+{% endfor %}
+</ul>
+</div>
+
+<div>
+    <p>Failed:</p>
+<ul>
+{% for frankel in frankels %}
+    {% if frankel.status == 'FAILED' %}
+    <a href="{% url 'unit_logs:frankel' frankel.id %}">
+    <li>{{ frankel.date_added|date:'M d' }} - {{ frankel }}</li>
+    </a>
+    {% endif %}
+{% endfor %}
+</ul>
+</div>
+<div>
+    <p>Boxed:</p>
+<ul>
+{% for frankel in frankels %}
+    {% if frankel.status == 'BOXED' %}
+    <a href="{% url 'unit_logs:frankel' frankel.id %}">
+    <li>{{ frankel.date_added|date:'M d' }} - {{ frankel }}</li>
+    </a>
+    {% endif %}
+{% endfor %}
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+
+{% endblock content %}

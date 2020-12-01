@@ -1,0 +1,40 @@
+{% extends "unit_logs/base.html" %}
+{% load bootstrap4 %}
+
+{% block content %} 
+
+<div class="card mb-3">
+    <h4 class="card-header">
+        {{ error }}
+
+    {{ winx }} 
+    </h4>
+
+    <div class="card-body">
+        
+        {% for entry in entries %}
+
+            {{ entry.date_added|date:'M d, Y H:i' }} {{ entry.venue }} {{ entry.status|linebreaks }}
+
+        {% endfor %}
+
+
+        <form method="POST" class="form">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+            <button type="submit" class="btn btn-primary btn-block">Save</button>
+            {% endbuttons %}
+        </form>
+    
+        <form method="POST" action="{% url 'unit_logs:deletewinx' winx.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-secondary btn-block">Delete</button>
+        </form>
+    
+    </div>
+</div>
+
+
+
+{% endblock content %}

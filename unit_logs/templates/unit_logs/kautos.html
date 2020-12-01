@@ -1,0 +1,82 @@
+{% extends "unit_logs/base.html" %}
+
+{% block content %} 
+
+<style>
+    .units{
+        display: flex;
+        flex-flow: row;
+        justify-content: space-around;
+
+    }
+</style>
+
+
+    
+<div class="pb-2 mb-2 border-bottom">
+   
+    <a class="btn btn-primary" href="{% url 'unit_logs:new_kauto' %}" role="button">Add a new Kauto</a>
+</div>
+
+<div class="units">
+
+<div>
+    <p>Sticks:</p>
+<ul>
+    {% for kauto in kautos %}
+        {% if kauto.status == 'STICK' %}
+            <a href="{% url 'unit_logs:kauto' kauto.id %}">
+            <li>{{ kauto.date_added|date:'M d' }} - {{ kauto }}</li>
+            </a>
+        {% endif %}
+    {% endfor %}
+</ul>
+</div>
+
+
+<div>
+    <p>Not on map:</p>
+<ul>
+{% for kauto in kautos %}
+    {% if kauto.status == 'MISSING' %}
+    <a href="{% url 'unit_logs:kauto' kauto.id %}">
+    <li>{{ kauto.date_added|date:'M d' }} - {{ kauto }}</li>
+    </a>
+    {% endif %}
+{% endfor %}
+</ul>
+</div>
+
+<div>
+    <p>Failed:</p>
+<ul>
+{% for kauto in kautos %}
+    {% if kauto.status == 'FAILED' %}
+    <a href="{% url 'unit_logs:kauto' kauto.id %}">
+    <li>{{ kauto.date_added|date:'M d' }} - {{ kauto }}</li>
+    </a>
+    {% endif %}
+{% endfor %}
+</ul>
+</div>
+
+<div>
+    <p>Boxed:</p>
+<ul>
+{% for kauto in kautos %}
+    {% if kauto.status == 'BOXED' %}
+    <a href="{% url 'unit_logs:kauto' kauto.id %}">
+    <li>{{ kauto.date_added|date:'M d' }} - {{ kauto }}</li>
+    </a>
+    {% endif %}
+{% endfor %}
+</ul>
+</div>
+
+
+
+</div>
+
+
+
+{% endblock content %}
