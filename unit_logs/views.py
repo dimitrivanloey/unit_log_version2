@@ -6,7 +6,7 @@ from datetime import datetime as dt
 import datetime
 
 from .models import Winx, Arkle, Denman, Enable, Frankel, Kauto
-from .forms import WinxForm, ArkleForm, DenmanForm, EnableForm, FrankelForm, KautoForm
+from .forms import WinxForm, ArkleForm, DenmanForm, EnableForm, FrankelForm, KautoForm, EntryForm, EnableEntryForm, ArkleEntryForm, DenmanEntryForm, KautoEntryForm, FrankelEntryForm
 
 
 today = datetime.date.today()
@@ -103,7 +103,81 @@ def winx(request, winx_id):
         form.save()
         return redirect('unit_logs:winxes')
     
+@xframe_options_exempt
+@login_required
+def enable(request, enable_id):
+    enable = Enable.objects.get(id=enable_id)
+    entries = enable.enable_entry_set.order_by('-date_added')
 
+    if request.method == 'GET':
+        form = EnableForm(instance=enable)
+        context = {'enable': enable, 'form':form, 'entries':entries}
+        return render(request, 'unit_logs/enable_unit.html', context)
+    else:
+        form = EnableForm(request.POST, instance=enable)
+        form.save()
+        return redirect('unit_logs:enables')
+
+@xframe_options_exempt
+@login_required
+def arkle(request, arkle_id):
+    arkle = Arkle.objects.get(id=arkle_id)
+    entries = arkle.arkle_entry_set.order_by('-date_added')
+
+    if request.method == 'GET':
+        form = ArkleForm(instance=arkle)
+        context = {'arkle': arkle, 'form':form, 'entries':entries}
+        return render(request, 'unit_logs/arkle_unit.html', context)
+    else:
+        form = ArkleForm(request.POST, instance=arkle)
+        form.save()
+        return redirect('unit_logs:arkles')
+        
+@xframe_options_exempt
+@login_required
+def denman(request, denman_id):
+    denman = Denman.objects.get(id=denman_id)
+    entries = denman.denman_entry_set.order_by('-date_added')
+
+    if request.method == 'GET':
+        form = DenmanForm(instance=denman)
+        context = {'denman': denman, 'form':form, 'entries':entries}
+        return render(request, 'unit_logs/denman_unit.html', context)
+    else:
+        form = DenmanForm(request.POST, instance=denman)
+        form.save()
+        return redirect('unit_logs:denmans')
+
+@xframe_options_exempt
+@login_required
+def kauto(request, kauto_id):
+    kauto = Kauto.objects.get(id=kauto_id)
+    entries = kauto.kauto_entry_set.order_by('-date_added')
+
+    if request.method == 'GET':
+        form = KautoForm(instance=kauto)
+        context = {'kauto': kauto, 'form':form, 'entries':entries}
+        return render(request, 'unit_logs/kauto_unit.html', context)
+    else:
+        form = KautoForm(request.POST, instance=kauto)
+        form.save()
+        return redirect('unit_logs:kautos')
+
+
+@xframe_options_exempt
+@login_required
+def frankel(request, frankel_id):
+    frankel = Frankel.objects.get(id=frankel_id)
+    entries = frankel.frankel_entry_set.order_by('-date_added')
+
+    if request.method == 'GET':
+        form = FrankelForm(instance=frankel)
+        context = {'frankel': frankel, 'form':form, 'entries':entries}
+        return render(request, 'unit_logs/frankel_unit.html', context)
+    else:
+        form = FrankelForm(request.POST, instance=frankel)
+        form.save()
+        return redirect('unit_logs:frankels')
 
 @xframe_options_exempt
 @login_required
@@ -112,18 +186,6 @@ def arkles(request):
     context = {'arkles' : arkles}
     return render(request, 'unit_logs/arkles.html', context)
 
-@xframe_options_exempt
-@login_required
-def arkle(request, arkle_id):
-    arkle = Arkle.objects.get(id=arkle_id)
-    if request.method == 'GET':
-        form = ArkleForm(instance=arkle)
-        context = {'arkle': arkle, 'form':form}
-        return render(request, 'unit_logs/arkle_unit.html', context)
-    else:
-        form = ArkleForm(request.POST, instance=arkle)
-        form.save()
-        return redirect('unit_logs:arkles')
 
 
 @xframe_options_exempt
@@ -134,18 +196,6 @@ def denmans(request):
     return render(request, 'unit_logs/denmans.html', context)
 
 
-@xframe_options_exempt
-@login_required
-def denman(request, denman_id):
-    denman = Denman.objects.get(id=denman_id)
-    if request.method == 'GET':
-        form = DenmanForm(instance=denman)
-        context = {'denman': denman, 'form':form}
-        return render(request, 'unit_logs/denman_unit.html', context)
-    else:
-        form = DenmanForm(request.POST, instance=denman)
-        form.save()
-        return redirect('unit_logs:denmans')
 
 
 @xframe_options_exempt
@@ -156,19 +206,6 @@ def enables(request):
     return render(request, 'unit_logs/enables.html', context)
 
 
-@xframe_options_exempt
-@login_required
-def enable(request, enable_id):
-    enable = Enable.objects.get(id=enable_id)
-    if request.method == 'GET':
-        form = EnableForm(instance=enable)
-        context = {'enable': enable, 'form':form}
-        return render(request, 'unit_logs/enable_unit.html', context)
-    else:
-        form = EnableForm(request.POST, instance=enable)
-        form.save()
-        return redirect('unit_logs:enables')
-
 
 @xframe_options_exempt
 @login_required
@@ -178,19 +215,6 @@ def frankels(request):
     return render(request, 'unit_logs/frankels.html', context)
 
 
-@xframe_options_exempt
-@login_required
-def frankel(request, frankel_id):
-    frankel = Frankel.objects.get(id=frankel_id)
-    if request.method == 'GET':
-        form = FrankelForm(instance=frankel)
-        context = {'frankel': frankel, 'form':form}
-        return render(request, 'unit_logs/frankel_unit.html', context)
-    else:
-        form = FrankelForm(request.POST, instance=frankel)
-        form.save()
-        return redirect('unit_logs:frankels')
-
 
 @xframe_options_exempt
 @login_required
@@ -199,19 +223,6 @@ def kautos(request):
     context = {'kautos' : kautos}
     return render(request, 'unit_logs/kautos.html', context)
 
-
-@xframe_options_exempt
-@login_required
-def kauto(request, kauto_id):
-    kauto = Kauto.objects.get(id=kauto_id)
-    if request.method == 'GET':
-        form = KautoForm(instance=kauto)
-        context = {'kauto': kauto, 'form':form}
-        return render(request, 'unit_logs/kauto_unit.html', context)
-    else:
-        form = KautoForm(request.POST, instance=kauto)
-        form.save()
-        return redirect('unit_logs:kautos')
 
 
 @xframe_options_exempt
@@ -380,3 +391,137 @@ def deletekauto(request, kauto_id):
     if request.method == 'POST':
         kauto.delete()
         return redirect('unit_logs:kautos')
+
+
+@xframe_options_exempt
+@login_required
+def new_winx_entry(request, winx_id):
+    """Add a new entry for a particular winx"""
+    winx = Winx.objects.get(id=winx_id)
+
+    if request.method != 'POST':
+        # No data submitted, create a blank form
+        form = EntryForm()
+    else:
+        # POST data submitted; process data
+        form = EntryForm(data=request.POST)
+        if form.is_valid():
+            new_winx_entry = form.save(commit=False)
+            new_winx_entry.winx = winx
+            new_winx_entry.save()
+            return redirect('unit_logs:winx', winx_id=winx_id)
+
+    # Display a blank or invalid form
+    context = {'winx': winx, 'form': form}
+    return render(request, 'unit_logs/new_winx_entry.html', context)
+
+@xframe_options_exempt
+@login_required
+def new_enable_entry(request, enable_id):
+    """Add a new entry for a particular enable"""
+    enable = Enable.objects.get(id=enable_id)
+
+    if request.method != 'POST':
+        # No data submitted, create a blank form
+        form = EntryForm()
+    else:
+        # POST data submitted; process data
+        form = EnableEntryForm(data=request.POST)
+        if form.is_valid():
+            new_enable_entry = form.save(commit=False)
+            new_enable_entry.enable = enable
+            new_enable_entry.save()
+            return redirect('unit_logs:enable', enable_id=enable_id)
+
+    # Display a blank or invalid form
+    context = {'enable': enable, 'form': form}
+    return render(request, 'unit_logs/new_enable_entry.html', context)
+
+@xframe_options_exempt
+@login_required
+def new_arkle_entry(request, arkle_id):
+    """Add a new entry for a particular arkle"""
+    arkle = Arkle.objects.get(id=arkle_id)
+
+    if request.method != 'POST':
+        # No data submitted, create a blank form
+        form = ArkleEntryForm()
+    else:
+        # POST data submitted; process data
+        form = ArkleEntryForm(data=request.POST)
+        if form.is_valid():
+            new_arkle_entry = form.save(commit=False)
+            new_arkle_entry.arkle = arkle
+            new_arkle_entry.save()
+            return redirect('unit_logs:arkle', arkle_id=arkle_id)
+
+    # Display a blank or invalid form
+    context = {'arkle': arkle, 'form': form}
+    return render(request, 'unit_logs/new_arkle_entry.html', context)
+
+
+@xframe_options_exempt
+@login_required
+def new_denman_entry(request, denman_id):
+    """Add a new entry for a particular denman"""
+    denman = Denman.objects.get(id=denman_id)
+
+    if request.method != 'POST':
+        # No data submitted, create a blank form
+        form = DenmanEntryForm()
+    else:
+        # POST data submitted; process data
+        form = DenmanEntryForm(data=request.POST)
+        if form.is_valid():
+            new_denman_entry = form.save(commit=False)
+            new_denman_entry.denman = denman
+            new_denman_entry.save()
+            return redirect('unit_logs:denman', denman_id=denman_id)
+
+    # Display a blank or invalid form
+    context = {'denman': denman, 'form': form}
+    return render(request, 'unit_logs/new_denman_entry.html', context)
+
+@xframe_options_exempt
+@login_required
+def new_kauto_entry(request, kauto_id):
+    """Add a new entry for a particular kauto"""
+    kauto = Kauto.objects.get(id=kauto_id)
+
+    if request.method != 'POST':
+        # No data submitted, create a blank form
+        form = KautoEntryForm()
+    else:
+        # POST data submitted; process data
+        form = KautoEntryForm(data=request.POST)
+        if form.is_valid():
+            new_kauto_entry = form.save(commit=False)
+            new_kauto_entry.kauto = kauto
+            new_kauto_entry.save()
+            return redirect('unit_logs:kauto', kauto_id=kauto_id)
+
+    # Display a blank or invalid form
+    context = {'kauto': kauto, 'form': form}
+    return render(request, 'unit_logs/new_kauto_entry.html', context)
+
+@xframe_options_exempt
+@login_required
+def new_frankel_entry(request, frankel_id):
+    """Add a new entry for a particular frankel"""
+    frankel = Frankel.objects.get(id=frankel_id)
+
+    if request.method != 'POST':
+        # No data submitted, create a blank form
+        form = FrankelEntryForm()
+    else:
+        # POST data submitted; process data
+        form = FrankelEntryForm(data=request.POST)
+        if form.is_valid():
+            new_frankel_entry = form.save(commit=False)
+            new_frankel_entry.frankel = frankel
+            new_frankel_entry.save()
+            return redirect('unit_logs:frankel', frankel_id=frankel_id)
+
+    # Display a blank or invalid form
+    context = {'frankel': frankel, 'form': form}
+    return render(request, 'unit_logs/new_frankel_entry.html', context)

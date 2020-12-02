@@ -11,10 +11,14 @@
     </h4>
 
     <div class="card-body">
+
+        <p>
+            <a href="{% url 'unit_logs:new_winx_entry' winx.id %}">Add new entry</a>
+        </p>
         
         {% for entry in entries %}
 
-            {{ entry.date_added|date:'M d, Y H:i' }} {{ entry.venue }} {{ entry.status|linebreaks }}
+            {{ entry.date_added|date:'M d, Y H:i' }} - {{ entry.venue }} - {{entry.status}} {{ entry.comments|linebreaks }}
 
         {% endfor %}
 

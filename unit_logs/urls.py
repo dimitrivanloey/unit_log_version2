@@ -52,5 +52,17 @@ urlpatterns = [
     path('frankels/<int:frankel_id>/delete', views.deletefrankel, name='deletefrankel'),
     path('kautos/<int:kauto_id>/delete', views.deletekauto, name='deletekauto'),
     
-    
+    # New Winx entry
+    path('new_winx_entry/<int:winx_id>', views.new_winx_entry, name='new_winx_entry'),
+    # New Enable entry
+    path('new_enable_entry/<int:enable_id>', views.new_enable_entry, name='new_enable_entry'),
+    # New Arkle entry
+    path('new_arkle_entry/<int:arkle_id>', views.new_arkle_entry, name='new_arkle_entry'),
+    # New Denman entry
+    path('new_denman_entry/<int:denman_id>', views.new_denman_entry, name='new_denman_entry'),
+    # New Kauto entry
+    path('new_kauto_entry/<int:kauto_id>', views.new_kauto_entry, name='new_kauto_entry'),
+    # New Frankel entry
+    path('new_frankel_entry/<int:frankel_id>', views.new_frankel_entry, name='new_frankel_entry'),
 ]
+

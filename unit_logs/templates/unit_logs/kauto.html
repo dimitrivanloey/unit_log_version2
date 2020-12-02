@@ -1,12 +1,15 @@
-Missing: {% for kauto in kautos_missing %}
+<p style="font-family: arial;">
+    Missing: {% for kauto in kautos_missing %}
 
-{{ kauto }} 
+    {{ kauto }} 
+
+    {% endfor %}
+</p>
+
+<p style="font-family: arial;">
+    Sticks:   {% for kauto in kautos_stick %}
+
+    {{ kauto }} 
 
 {% endfor %}
-
-</br>
-Sticks:   {% for kauto in kautos_stick %}
-
-{{ kauto }} 
-
-{% endfor %}
+</p>

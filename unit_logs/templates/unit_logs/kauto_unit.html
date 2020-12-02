@@ -11,6 +11,17 @@
     </h4>
 
     <div class="card-body">
+
+        <p>
+            <a href="{% url 'unit_logs:new_kauto_entry' kauto.id %}">Add new entry</a>
+        </p>
+
+        {% for entry in entries %}
+
+            {{ entry.date_added|date:'M d, Y H:i' }} - {{ entry.venue }} - {{entry.status}} {{ entry.comments|linebreaks }}
+
+        {% endfor %}
+
         <form method="POST" class="form">
             {% csrf_token %}
             {% bootstrap_form form %}
