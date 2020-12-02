@@ -15,7 +15,6 @@ yesterday = today - datetime.timedelta(days=1)
 
 # Individual OCM Pages
 @xframe_options_exempt
-@login_required
 def winx_page(request):
     winxes_missing = Winx.objects.filter(date_added = today, status = 'MISSING').order_by('-date_added', 'number')
     winxes_stick = Winx.objects.filter(date_added = today, status = 'STICK').order_by('-date_added', 'number')
@@ -23,7 +22,6 @@ def winx_page(request):
     return render(request, 'unit_logs/winx.html', context)
 
 @xframe_options_exempt
-@login_required
 def arkle_page(request):
     arkles_missing = Arkle.objects.filter(date_added = today, status = 'MISSING').order_by('-date_added', 'number')
     arkles_stick = Arkle.objects.filter(date_added = today, status = 'STICK').order_by('-date_added', 'number')
@@ -31,7 +29,6 @@ def arkle_page(request):
     return render(request, 'unit_logs/arkle.html', context)
 
 @xframe_options_exempt
-@login_required
 def denman_page(request):
     denmans_missing = Denman.objects.filter(date_added = today, status = 'MISSING').order_by('-date_added', 'number')
     denmans_stick = Denman.objects.filter(date_added = today, status = 'STICK').order_by('-date_added', 'number')
@@ -39,7 +36,6 @@ def denman_page(request):
     return render(request, 'unit_logs/denman.html', context)
 
 @xframe_options_exempt
-@login_required
 def enable_page(request):
     enables_missing = Enable.objects.filter(date_added = today, status = 'MISSING').order_by('-date_added', 'number')
     enables_stick = Enable.objects.filter(date_added = today, status = 'STICK').order_by('-date_added', 'number')
@@ -47,7 +43,6 @@ def enable_page(request):
     return render(request, 'unit_logs/enable.html', context)
 
 @xframe_options_exempt
-@login_required
 def frankel_page(request):
     frankels_missing = Frankel.objects.filter(date_added = today, status = 'MISSING').order_by('-date_added', 'number')
     frankels_stick = Frankel.objects.filter(date_added = today, status = 'STICK').order_by('-date_added', 'number')
@@ -55,7 +50,6 @@ def frankel_page(request):
     return render(request, 'unit_logs/frankel.html', context)
 
 @xframe_options_exempt
-@login_required
 def kauto_page(request):
     kautos_missing = Kauto.objects.filter(date_added = today, status = 'MISSING').order_by('-date_added', 'number')
     kautos_stick = Kauto.objects.filter(date_added = today, status = 'STICK').order_by('-date_added', 'number')
