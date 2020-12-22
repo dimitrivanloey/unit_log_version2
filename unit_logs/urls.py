@@ -64,5 +64,30 @@ urlpatterns = [
     path('new_kauto_entry/<int:kauto_id>', views.new_kauto_entry, name='new_kauto_entry'),
     # New Frankel entry
     path('new_frankel_entry/<int:frankel_id>', views.new_frankel_entry, name='new_frankel_entry'),
+
+    # Edit winx entry
+    path('edit_winx_entry/<int:entry_id>', views.edit_winx_entry, name='edit_winx_entry'),
+    path('delete_winx_entry/<int:entry_id>', views.delete_winx_entry, name='delete_winx_entry'),
+
+    # Edit enable entry
+    path('edit_enable_entry/<int:entry_id>', views.edit_enable_entry, name='edit_enable_entry'),
+    path('delete_enable_entry/<int:entry_id>', views.delete_enable_entry, name='delete_enable_entry'),
+
+    # Edit arkle entry
+    path('edit_arkle_entry/<int:entry_id>', views.edit_arkle_entry, name='edit_arkle_entry'),
+    path('delete_arkle_entry/<int:entry_id>', views.delete_arkle_entry, name='delete_arkle_entry'),
+
+    # Edit denman entry
+    path('edit_denman_entry/<int:entry_id>', views.edit_denman_entry, name='edit_denman_entry'),
+    path('delete_denman_entry/<int:entry_id>', views.delete_denman_entry, name='delete_denman_entry'),
+
+    # Edit kauto entry
+    path('edit_kauto_entry/<int:entry_id>', views.edit_kauto_entry, name='edit_kauto_entry'),
+    path('delete_kauto_entry/<int:entry_id>', views.delete_kauto_entry, name='delete_kauto_entry'),
+
+    # Edit frankel entry
+    path('edit_frankel_entry/<int:entry_id>', views.edit_frankel_entry, name='edit_frankel_entry'),
+    path('delete_frankel_entry/<int:entry_id>', views.delete_frankel_entry, name='delete_frankel_entry'),
+    
 ]
 

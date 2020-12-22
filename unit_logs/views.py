@@ -5,8 +5,9 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from datetime import datetime as dt
 import datetime
 
-from .models import Winx, Arkle, Denman, Enable, Frankel, Kauto
+from .models import Winx, Arkle, Denman, Enable, Frankel, Kauto, Entry
 from .forms import WinxForm, ArkleForm, DenmanForm, EnableForm, FrankelForm, KautoForm, EntryForm, EnableEntryForm, ArkleEntryForm, DenmanEntryForm, KautoEntryForm, FrankelEntryForm
+from unit_logs.models import Arkle_Entry, Denman_Entry, Enable_Entry, Frankel_Entry, Kauto_Entry
 
 
 today = datetime.date.today()
@@ -519,3 +520,174 @@ def new_frankel_entry(request, frankel_id):
     # Display a blank or invalid form
     context = {'frankel': frankel, 'form': form}
     return render(request, 'unit_logs/new_frankel_entry.html', context)
+
+
+# Edit winx entry pages
+@xframe_options_exempt
+@login_required
+def edit_winx_entry(request, entry_id):
+    """Edit an exiting winx entry"""
+    entry = Entry.objects.get(id=entry_id)
+    winx = entry.winx
+
+    if request.method != 'POST':
+        form = EntryForm(instance=entry)
+    else:
+        form = EntryForm(instance=entry, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('unit_logs:winx', winx_id=winx.id)
+
+    context = {'entry': entry, 'winx': winx, 'form': form}
+    return render(request, 'unit_logs/edit_winx_entry.html', context)
+
+@xframe_options_exempt
+@login_required
+def delete_winx_entry(request, entry_id):
+    entry = Entry.objects.get(id=entry_id)
+    winx = entry.winx
+    if request.method == 'POST':
+        entry.delete()
+        return redirect('unit_logs:winx', winx_id=winx.id)
+
+
+# Edit enable entry pages
+@xframe_options_exempt
+@login_required
+def edit_enable_entry(request, entry_id):
+    """Edit an exiting enable entry"""
+    entry = Enable_Entry.objects.get(id=entry_id)
+    enable = entry.enable
+
+    if request.method != 'POST':
+        form = EnableEntryForm(instance=entry)
+    else:
+        form = EnableEntryForm(instance=entry, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('unit_logs:enable', enable_id=enable.id)
+
+    context = {'entry': entry, 'enable': enable, 'form': form}
+    return render(request, 'unit_logs/edit_enable_entry.html', context)
+
+@xframe_options_exempt
+@login_required
+def delete_enable_entry(request, entry_id):
+    entry = Enable_Entry.objects.get(id=entry_id)
+    enable = entry.enable
+    if request.method == 'POST':
+        entry.delete()
+        return redirect('unit_logs:enable', enable_id=enable.id)
+
+# Edit arkle entry pages
+@xframe_options_exempt
+@login_required
+def edit_arkle_entry(request, entry_id):
+    """Edit an exiting arkle entry"""
+    entry = Arkle_Entry.objects.get(id=entry_id)
+    arkle = entry.arkle
+
+    if request.method != 'POST':
+        form = ArkleEntryForm(instance=entry)
+    else:
+        form = ArkleEntryForm(instance=entry, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('unit_logs:arkle', arkle_id=arkle.id)
+
+    context = {'entry': entry, 'arkle': arkle, 'form': form}
+    return render(request, 'unit_logs/edit_arkle_entry.html', context)
+
+@xframe_options_exempt
+@login_required
+def delete_arkle_entry(request, entry_id):
+    entry = Arkle_Entry.objects.get(id=entry_id)
+    arkle = entry.arkle
+    if request.method == 'POST':
+        entry.delete()
+        return redirect('unit_logs:arkle', arkle_id=arkle.id)
+
+# Edit denman entry pages
+@xframe_options_exempt
+@login_required
+def edit_denman_entry(request, entry_id):
+    """Edit an exiting denman entry"""
+    entry = Denman_Entry.objects.get(id=entry_id)
+    denman = entry.denman
+
+    if request.method != 'POST':
+        form = DenmanEntryForm(instance=entry)
+    else:
+        form = DenmanEntryForm(instance=entry, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('unit_logs:denman', denman_id=denman.id)
+
+    context = {'entry': entry, 'denman': denman, 'form': form}
+    return render(request, 'unit_logs/edit_denman_entry.html', context)
+
+
+@xframe_options_exempt
+@login_required
+def delete_denman_entry(request, entry_id):
+    entry = Denman_Entry.objects.get(id=entry_id)
+    denman = entry.denman
+    if request.method == 'POST':
+        entry.delete()
+        return redirect('unit_logs:denman', denman_id=denman.id)
+
+# Edit kauto entry pages
+@xframe_options_exempt
+@login_required
+def edit_kauto_entry(request, entry_id):
+    """Edit an exiting kauto entry"""
+    entry = Kauto_Entry.objects.get(id=entry_id)
+    kauto = entry.kauto
+
+    if request.method != 'POST':
+        form = KautoEntryForm(instance=entry)
+    else:
+        form = KautoEntryForm(instance=entry, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('unit_logs:kauto', kauto_id=kauto.id)
+
+    context = {'entry': entry, 'kauto': kauto, 'form': form}
+    return render(request, 'unit_logs/edit_kauto_entry.html', context)
+
+@xframe_options_exempt
+@login_required
+def delete_kauto_entry(request, entry_id):
+    entry = Kauto_Entry.objects.get(id=entry_id)
+    kauto = entry.kauto
+    if request.method == 'POST':
+        entry.delete()
+        return redirect('unit_logs:kauto', kauto_id=kauto.id)
+
+# Edit frankel entry pages
+@xframe_options_exempt
+@login_required
+def edit_frankel_entry(request, entry_id):
+    """Edit an exiting frankel entry"""
+    entry = Frankel_Entry.objects.get(id=entry_id)
+    frankel = entry.frankel
+
+    if request.method != 'POST':
+        form = FrankelEntryForm(instance=entry)
+    else:
+        form = FrankelEntryForm(instance=entry, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('unit_logs:frankel', frankel_id=frankel.id)
+
+    context = {'entry': entry, 'frankel': frankel, 'form': form}
+    return render(request, 'unit_logs/edit_frankel_entry.html', context)
+
+@xframe_options_exempt
+@login_required
+def delete_frankel_entry(request, entry_id):
+    entry = Frankel_Entry.objects.get(id=entry_id)
+    frankel = entry.frankel
+    if request.method == 'POST':
+        entry.delete()
+        return redirect('unit_logs:frankel', frankel_id=frankel.id)

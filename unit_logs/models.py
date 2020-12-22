@@ -7,11 +7,13 @@ class Winx(models.Model):
         ('FAILED', 'Failed'),
         ('STICK', 'Stick'),
         ('BOXED', 'Boxed'),
+        ('IN SERVICE', 'In Service'),
+        ('NOT IN SERVICE', 'Not In Service'),
     }
 
     number = models.PositiveSmallIntegerField()
     date_added = models.DateField(auto_now_add=True)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='STICK')
+    status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='IN SERVICE')
 
     def __str__(self):
         """Returning a sring representation of the model"""
@@ -26,11 +28,13 @@ class Enable(models.Model):
         ('FAILED', 'Failed'),
         ('STICK', 'Stick'),
         ('BOXED', 'Boxed'),
+        ('IN SERVICE', 'In Service'),
+        ('NOT IN SERVICE', 'Not In Service'),
     }
 
     number = models.PositiveSmallIntegerField()
     date_added = models.DateField(auto_now_add=True)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='STICK')
+    status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='IN SERVICE')
 
     def __str__(self):
         """Returning a sring representation of the model"""
@@ -45,11 +49,13 @@ class Arkle(models.Model):
         ('FAILED', 'Failed'),
         ('STICK', 'Stick'),
         ('BOXED', 'Boxed'),
+        ('IN SERVICE', 'In Service'),
+        ('NOT IN SERVICE', 'Not In Service'),
     }
 
     number = models.PositiveSmallIntegerField()
     date_added = models.DateField(auto_now_add=True)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='STICK')
+    status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='IN SERVICE')
 
     def __str__(self):
         """Returning a sring representation of the model"""
@@ -64,11 +70,13 @@ class Denman(models.Model):
         ('FAILED', 'Failed'),
         ('STICK', 'Stick'),
         ('BOXED', 'Boxed'),
+        ('IN SERVICE', 'In Service'),
+        ('NOT IN SERVICE', 'Not In Service'),
     }
 
     number = models.PositiveSmallIntegerField()
     date_added = models.DateField(auto_now_add=True)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='STICK')
+    status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='IN SERVICE')
 
     def __str__(self):
         """Returning a sring representation of the model"""
@@ -88,7 +96,7 @@ class Kauto(models.Model):
 
     number = models.PositiveSmallIntegerField()
     date_added = models.DateField(auto_now_add=True)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='STICK')
+    status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='IN SERVICE')
 
     def __str__(self):
         """Returning a sring representation of the model"""
@@ -103,11 +111,13 @@ class Frankel(models.Model):
         ('FAILED', 'Failed'),
         ('STICK', 'Stick'),
         ('BOXED', 'Boxed'),
+        ('IN SERVICE', 'In Service'),
+        ('NOT IN SERVICE', 'Not In Service'),
     }
 
     number = models.PositiveSmallIntegerField()
     date_added = models.DateField(auto_now_add=True)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='STICK')
+    status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='IN SERVICE')
 
     def __str__(self):
         """Returning a sring representation of the model"""
@@ -125,6 +135,12 @@ class Entry(models.Model):
         ('No Solid Orange', 'No Solid Orange'),
         ('Connector Broken', 'Connector Broken'),
         ('Switch Broken', 'Switch Broken'),
+        ('Missing', 'Missing'),
+        ('Stick', 'Stick'),
+        ('Failed', 'Failed'),
+        ('In Repair', 'In Repair'),
+        ('Refurb', 'Refurb'),
+        ('Never Worked', 'Refurb'),
     }
 
     VENUES = {
@@ -188,6 +204,12 @@ class Enable_Entry(models.Model):
         ('No Solid Orange', 'No Solid Orange'),
         ('Connector Broken', 'Connector Broken'),
         ('Switch Broken', 'Switch Broken'),
+        ('Missing', 'Missing'),
+        ('Stick', 'Stick'),
+        ('Failed', 'Failed'),
+        ('In Repair', 'In Repair'),
+        ('Refurb', 'Refurb'),
+        ('Never Worked', 'Refurb'),
     }
 
     VENUES = {
@@ -251,6 +273,12 @@ class Arkle_Entry(models.Model):
         ('No Solid Orange', 'No Solid Orange'),
         ('Connector Broken', 'Connector Broken'),
         ('Switch Broken', 'Switch Broken'),
+        ('Missing', 'Missing'),
+        ('Stick', 'Stick'),
+        ('Failed', 'Failed'),
+        ('In Repair', 'In Repair'),
+        ('Refurb', 'Refurb'),
+        ('Never Worked', 'Refurb'),
     }
 
     VENUES = {
@@ -313,6 +341,12 @@ class Denman_Entry(models.Model):
         ('No Solid Orange', 'No Solid Orange'),
         ('Connector Broken', 'Connector Broken'),
         ('Switch Broken', 'Switch Broken'),
+        ('Missing', 'Missing'),
+        ('Stick', 'Stick'),
+        ('Failed', 'Failed'),
+        ('In Repair', 'In Repair'),
+        ('Refurb', 'Refurb'),
+        ('Never Worked', 'Refurb'),
     }
 
     VENUES = {
@@ -375,6 +409,12 @@ class Kauto_Entry(models.Model):
         ('No Solid Orange', 'No Solid Orange'),
         ('Connector Broken', 'Connector Broken'),
         ('Switch Broken', 'Switch Broken'),
+        ('Missing', 'Missing'),
+        ('Stick', 'Stick'),
+        ('Failed', 'Failed'),
+        ('In Repair', 'In Repair'),
+        ('Refurb', 'Refurb'),
+        ('Never Worked', 'Refurb'),
     }
 
     VENUES = {
@@ -437,6 +477,12 @@ class Frankel_Entry(models.Model):
         ('No Solid Orange', 'No Solid Orange'),
         ('Connector Broken', 'Connector Broken'),
         ('Switch Broken', 'Switch Broken'),
+        ('Missing', 'Missing'),
+        ('Stick', 'Stick'),
+        ('Failed', 'Failed'),
+        ('In Repair', 'In Repair'),
+        ('Refurb', 'Refurb'),
+        ('Never Worked', 'Refurb'),
     }
 
     VENUES = {
